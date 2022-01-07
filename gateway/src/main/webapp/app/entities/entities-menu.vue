@@ -1,16 +1,16 @@
 <template>
   <div>
-    <b-dropdown-item to="/post">
+    <b-dropdown-item to="/tag">
       <font-awesome-icon icon="asterisk" />
-      <span v-text="$t('global.menu.entities.blogPost')">Post</span>
+      <span v-text="$t('global.menu.entities.blogTag')">Tag</span>
     </b-dropdown-item>
     <b-dropdown-item to="/blog">
       <font-awesome-icon icon="asterisk" />
       <span v-text="$t('global.menu.entities.blogBlog')">Blog</span>
     </b-dropdown-item>
-    <b-dropdown-item to="/tag">
+    <b-dropdown-item to="/post">
       <font-awesome-icon icon="asterisk" />
-      <span v-text="$t('global.menu.entities.blogTag')">Tag</span>
+      <span v-text="$t('global.menu.entities.blogPost')">Post</span>
     </b-dropdown-item>
     <!-- jhipster-needle-add-entity-to-menu - JHipster will add entities to the menu here -->
   </div>
