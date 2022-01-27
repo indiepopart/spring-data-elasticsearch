@@ -7,9 +7,9 @@
       "jhipster-needle-menu-add-element": "JHipster will add additional menu entries here (do not translate!)",
       "entities": {
         "main": "Entities",
-        "blogPost": "Post",
-        "blogBlog": "Blog",
         "blogTag": "Tag",
+        "blogBlog": "Blog",
+        "blogPost": "Post",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
       "account": {

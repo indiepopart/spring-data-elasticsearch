@@ -17,7 +17,7 @@ services:
     ports:
       - "8080:8080"
   gateway-postgresql:
-    image: postgres:13.5
+    image: postgres:14.1
     environment:
       - POSTGRES_USER=gateway
       - POSTGRES_PASSWORD=
@@ -29,6 +29,7 @@ services:
       - _JAVA_OPTIONS=-Xmx512m -Xms256m
       - SPRING_PROFILES_ACTIVE=prod,api-docs
       - MANAGEMENT_METRICS_EXPORT_PROMETHEUS_ENABLED=true
+      - MANAGEMENT_ENDPOINT_HEALTH_PROBES_ENABLED=false
       - EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE=http://admin:$${jhipster.registry.password}@jhipster-registry:8761/eureka
       - SPRING_CLOUD_CONFIG_URI=http://admin:$${jhipster.registry.password}@jhipster-registry:8761/config
       - SPRING_DATA_MONGODB_URI=mongodb://blog-mongodb:27017/?waitQueueMultiple=1000
@@ -37,13 +38,12 @@ services:
       - SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_OIDC_CLIENT_ID=internal
       - SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_OIDC_CLIENT_SECRET=internal
       - JHIPSTER_SLEEP=30
-      - SPRING_DATA_ELASTICSEARCH_CLIENT_REACTIVE_ENDPOINTS=blog-elasticsearch:9200
+      - SPRING_ELASTICSEARCH_URIS=http://blog-elasticsearch:9200
       - JHIPSTER_REGISTRY_PASSWORD=admin
-      - MANAGEMENT_ENDPOINT_HEALTH_PROBES_ENABLED=false
   blog-mongodb:
-    image: mongo:4.4.10
+    image: mongo:4.4.11
   blog-elasticsearch:
-    image: docker.elastic.co/elasticsearch/elasticsearch:7.13.3
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.15.2
     environment:
       - xpack.security.enabled=false
       - discovery.type=single-node
@@ -60,16 +60,17 @@ services:
       - IPC_LOCK
     ports:
       - 9200:9200
+
   blog-kibana:
-     image: docker.elastic.co/kibana/kibana:7.13.3
-     ports:
-       - 5601:5601
-     environment:
-       ELASTICSEARCH_URL: http://blog-elasticsearch:9200
-       ELASTICSEARCH_HOSTS: '["http://blog-elasticsearch:9200"]'
+    image: docker.elastic.co/kibana/kibana:7.15.2
+    ports:
+      - 5601:5601
+    environment:
+      ELASTICSEARCH_URL: http://blog-elasticsearch:9200
+      ELASTICSEARCH_HOSTS: '["http://blog-elasticsearch:9200"]'
 
   jhipster-registry:
-    image: jhipster/jhipster-registry:v7.1.0
+    image: jhipster/jhipster-registry:v7.2.0
     volumes:
       - ./central-server-config:/central-config
     # By default the JHipster Registry runs with the "dev" and "native"
